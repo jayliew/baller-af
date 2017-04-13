@@ -1,0 +1,65 @@
+#!/usr/bin/env python
+
+# -*- coding: us-ascii -*-
+
+"""
+baller
+~~~~~~~~~~~~
+
+So that you can be baller af when you are showing off stuff via command line
+
+PRE-REQUISITES:
+1. figlet (brew install figlet)
+2. lolcat (brew install lolcat)
+
+INSTALLATION:
+1. Put this script somewhere in your executable path, preferably where all the 
+3rd party user libs are e.g. /usr/local/bin 
+2. chmod u+x
+3. baller af away
+
+USAGE:
+zsh> baller hello world
+
+NOTE: 
+Shell will always try to interpret your input first, so for instance, if you have 
+an apostrophe, you'll need to escape by adding double quotes around your input
+
+e.g.
+
+zsh> baller "Hello world, I've arrived"
+
+:copyright: (c) 2017 by Jay Liew
+:license: MIT
+"""
+
+from subprocess import check_output
+import sys
+import os
+import re
+import random
+
+figlet_font_path = check_output(["figlet", "-I2"]).strip()
+
+fonts_in_directory = check_output(["ls", figlet_font_path]).split()
+
+font_file_extension = '(\w+)\.flf$'
+
+usable_fonts = []
+
+for font in fonts_in_directory:
+    if re.search(font_file_extension, font, re.IGNORECASE) != None:
+        usable_fonts.append(re.search(font_file_extension, font, re.IGNORECASE).groups()[0])
+
+secure_random = random.SystemRandom() # bank-grade encryption randomization, etc.
+selected_font = secure_random.choice(usable_fonts)
+
+user_input = " ".join(sys.argv[1:]) # ignore [0] because it is __file__ name
+
+if len(user_input.strip()) == 0:
+    print("USAGE: \"baller hello world\" (escape shell chars if needed)")
+def shellquote(s): # escape shell chars
+    return "'" + s.replace("'", "'\\''") + "'"
+
+os.system("figlet -f " + selected_font + " " + shellquote(user_input) + " | lolcat")
+
