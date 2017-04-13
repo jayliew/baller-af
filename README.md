@@ -6,7 +6,8 @@ So that you can be baller af when you are showing off stuff via command line
 
 # WHY
 Q: Why not just run the `figlet` command and pipe results to `lolcat`?
-A: Because you'd be stuck with 1 default font for your figlet, which defeats the point of being a show boat. Manually figuring out the commands to change the font involve searching for your figlet's font directory, and manually picking a font from a huge list, after pruning that list from a list of incompatible font file names. Having to think means increased friction, which leads to less usage. Low friction = higher usage.
+
+A: Because you'd be stuck with 1 default font for your figlet, which gets in the way of showboating. Manually figuring out the commands to change the font involve searching for your figlet's font directory, and manually picking a font from a huge list--but not before first pruning that list from incompatible figlet font files. Having to think means increased friction, which leads to less usage. Low friction = higher usage.
 
 # PRE-REQUISITES
 1. figlet (brew install figlet)
